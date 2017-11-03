@@ -1,0 +1,163 @@
+html
+  font-size: 10px
+  font-family: 'Cabin', sans-serif
+header, footer, section, details, aside, article, main, div, ul, ol, dl, h1, h2, h3, h4, h5, h6, p
+  padding: 0
+  margin: 0
+body
+  margin: 0 auto
+  box-sizing: border-box
+a
+  text-decoration: none
+ul
+  list-style-type: none
+  padding:0
+  margin: 0
+input, button
+  appearance: none
+  -webkit-appearance: none
+  outline: none
+  background: none
+  border: none
+  padding: none
+  vertical-align: baseline
+  -webkit-font-smoothing: antialiased
+  -moz-osx-font-smoothing: grayscale
+
+cr_primary=#A9E8DC
+cr_sub=#0284A8
+cr_dec=#A9E8DC
+cr_min=#E1F7E7
+
+@import url('https://fonts.googleapis.com/css?family=Cabin')
+header
+  background: cr_primary
+  padding: 0 2%
+  position: fixed
+  top: 0
+  left: 0
+  right: 0
+  h1
+    color: #eee
+    float: left
+    margin:0
+    padding: 20px 0
+    font-size: 2rem
+  .lists
+    display: none
+  .menu
+    display: none
+    border-radius: 3px
+    float: right
+    margin-top: 20px
+
+    span
+      width: 25px
+      background: #666
+      height: 3px
+      display: block
+      margin: 3px
+  .filters
+    float: right
+    li
+      display: inline-block
+      padding: 24px 15px
+      a
+        color: #eee
+
+body
+    font-size: 1.4rem
+    color: #333
+main
+  box-sizing: border-box
+  aside
+    position: fixed
+    width: 16%
+    top: 83px
+    left: 0
+    bottom: 0
+    overflow-x: hidden
+    overflow-y: auto
+    ul
+      li
+        display: block
+        font-size: 1.5rem
+        margin: 7% 15%
+        color: #666
+        a
+          color: #666
+  article
+    line-height: 1.5
+    padding:1% 4%
+    margin-top: 83px
+    margin-left: 16%
+    .date
+      font-size: 1.2rem
+      color: #666
+      margin-top: -15px
+    h1
+      font-size: 2rem
+      margin: 15px 0
+    p
+      margin: 15px 0
+    a
+      color: cr_sub
+    img
+      padding: 0 5px
+    ul
+      list-style-type: circle
+      margin-left: 17px
+    ol
+      list-style-type: decimal-leading-zero
+      margin-left: 17px
+
+    pre, code
+        overflow-x: auto
+    code
+      display:block
+      font-family: Consolas, Courier New, monospace;
+      color: #888
+      border-left: 1px solid cr_min
+
+body:before
+  background: #FFF
+  content: ''
+  top: 63px
+  left: 0
+  right: 0
+  height: 20px
+  position: fixed
+
+
+@media (max-width: 600px)
+  header
+    .lists
+      display: block
+      float: right
+      margin-top: 24px
+      font-weight: bold
+      color:#666
+      font-size: 1.5rem
+    .menu
+      display: block
+      &:hover
+        cursor: pointer
+      &:hover ~ ul
+        display: block
+    .filters
+      margin-top: 35px
+      text-align: right
+      float: none
+      display: none
+      &:hover
+        display:block
+      li
+        display: block
+        padding: 15px 5px
+        a
+          display: block
+  main
+    aside
+      display: none
+    article
+      margin-left: 0
