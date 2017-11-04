@@ -9,76 +9,79 @@
     <!-- <link rel="stylesheet" href="./dist/css/app.css"> -->
   </head>
   <body>
-  <header>
+  <header class="header">
     <h1>Scrachy Note</h1>
-    <button class="menu">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
-    <a href="#" class="lists">Note List</a>
     <ul class="filters">
-      <li><a href="#">Today</a></li>
-      <li><a href="#">Last Week</a></li>
-      <li><a href="#">Last Month</a></li>
-      <li><a href="#">Select Day</a></li>
+      <li><a href="#" class="btn today">Today</a></li>
+      <li><a href="#" class="btn week">Last Week</a></li>
+      <li><a href="#" class="btn month">Last Month</a></li>
+      <li><a href="#" class="btn custom">Select Day</a></li>
     </ul>
+    <a href="#/new" class="btn create">New</a>
+    <a href="#/lists" class="btn lists">Note List</a>
   </header>
   <main>
     <aside>
       <section class="lists">
         <ul>
-          <li><a href="#/222">aaa</a></li>
-          <li><a href="#">aaabbb</a></li>
-          <li><a href="#">aaabbbccc</a></li>
-          <li><a href="#">aaabbbcccttt</a></li>
-          <li><a href="#">aaa</a></li>
-          <li><a href="#">aaabbb</a></li>
-          <li><a href="#">aaabbbccc</a></li>
-          <li><a href="#">aaabbbcccttt</a></li>
-          <li><a href="#">aaa</a></li>
-          <li><a href="#">aaabbb</a></li>
-          <li><a href="#">aaabbbccc</a></li>
-          <li><a href="#">aaabbbcccttt</a></li>
-          <li><a href="#">aaa</a></li>
-          <li><a href="#">aaabbb</a></li>
-          <li><a href="#">aaabbbccc</a></li>
-          <li><a href="#">aaabbbcccttt</a></li><li><a href="#">aaa</a></li>
-          <li><a href="#">aaabbb</a></li>
-          <li><a href="#">aaabbbccc</a></li>
-          <li><a href="#">aaabbbcccttt</a></li>
-          <li><a href="#">aaa</a></li>
-          <li><a href="#">aaabbb</a></li>
-          <li><a href="#">aaabbbccc</a></li>
-          <li><a href="#">aaabbbcccttt</a></li>
-          <li><a href="#">aaa</a></li>
-          <li><a href="#">aaabbb</a></li>
-          <li><a href="#">aaabbbccc</a></li>
-          <li><a href="#">aaabbbcccttt</a></li>
-          <li><a href="#">aaa</a></li>
-          <li><a href="#">aaabbb</a></li>
-          <li><a href="#">aaabbbccc</a></li>
-          <li><a href="#">aaabbbcccttt</a></li>
+          <li><a href="#/222">aaa</a><button class="remove"></button></li>
+          <li><a href="#">aaabbb</a><button class="remove"></button></li>
+          <li><a href="#">aaabbbccc</a><button class="remove"></button></li>
+          <li><a href="#">aaabbbcccttt</a><button class="remove"></button></li>
+          <li><a href="#">aaa</a><button class="remove"></button></li>
+          <li><a href="#">aaabbb</a><button class="remove"></button></li>
+          <li><a href="#">aaabbbccc</a><button class="remove"></button></li>
+          <li><a href="#">aaabbbcccttt</a><button class="remove"></button></li>
+          <li><a href="#">aaa</a><button class="remove"></button></li>
+          <li><a href="#">aaabbb</a><button class="remove"></button></li>
+          <li><a href="#">aaabbbccc</a><button class="remove"></button></li>
+          <li><a href="#">aaabbbcccttt</a><button class="remove"></button></li>
+          <li><a href="#">aaa</a><button class="remove"></button></li>
+          <li><a href="#">aaabbb</a><button class="remove"></button></li>
+          <li><a href="#">aaabbbccc</a><button class="remove"></button></li>
+          <li><a href="#">aaabbbcccttt</a><button class="remove"></button></li><li><a href="#">aaa</a><button class="remove"></button></li>
+          <li><a href="#">aaabbb</a><button class="remove"></button></li>
+          <li><a href="#">aaabbbccc</a><button class="remove"></button></li>
+          <li><a href="#">aaabbbcccttt</a><button class="remove"></button></li>
+          <li><a href="#">aaa</a><button class="remove"></button></li>
+          <li><a href="#">aaabbb</a><button class="remove"></button></li>
+          <li><a href="#">aaabbbccc</a><button class="remove"></button></li>
+          <li><a href="#">aaabbbcccttt</a><button class="remove"></button></li>
+          <li><a href="#">aaa</a><button class="remove"></button></li>
+          <li><a href="#">aaabbb</a><button class="remove"></button></li>
+          <li><a href="#">aaabbbccc</a><button class="remove"></button></li>
+          <li><a href="#">aaabbbcccttt</a><button class="remove"></button></li>
+          <li><a href="#">aaa</a><button class="remove"></button></li>
+          <li><a href="#">aaabbb</a><button class="remove"></button></li>
+          <li><a href="#">aaabbbccc</a><button class="remove"></button></li>
+          <li><a href="#">aaabbbcccttt</a><button class="remove"></button></li>
         </ul>
       </section>
     </aside>
     <article>
-      <h1>This is title</h1>
-      <p class="date">2017年11月4日00:39:28</p>
+      <header>
+        <h1>This is title</h1>
+        <p class="date">2017年11月4日00:39:28</p>
+        <section class="item-menu">
+          <a href="#" class="btn remove">REMOVE</a>
+          <a href="#" class="btn edit">EDIT</a>
+          <a href="#" class="btn copy">COPY</a>
+        </section>
+      </header>
 
       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt consequatur dicta enim fugiat, inventore illo, quae omnis deleniti magnam, quas placeat in assumenda repellendus necessitatibus labore fugit. Modi, soluta vel.</p>
       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. <a href="#">good stuff</a> Natus laborum non nobis odio velit provident blanditiis cupiditate ratione veritatis iure quod totam dolorem quasi sed rem, minus. Eos, vitae, enim!</p>
       <ul>
-        <li>aaat st</li>
-        <li>aaat st</li>
-        <li>aaat st</li>
-        <li>aaatr t</li>
+        <li>aaat st<button class="remove"></button></li>
+        <li>aaat st<button class="remove"></button></li>
+        <li>aaat st<button class="remove"></button></li>
+        <li>aaatr t<button class="remove"></button></li>
       </ul>
       <ol>
-        <li>aaat st</li>
-        <li>aaat st</li>
-        <li>aaat st</li>
-        <li>aaatr t</li>
+        <li>aaat st<button class="remove"></button></li>
+        <li>aaat st<button class="remove"></button></li>
+        <li>aaat st<button class="remove"></button></li>
+        <li>aaatr t<button class="remove"></button></li>
       </ol>
       <p>Lorem ipsum <img src="http://fakeimg.pl/350x200/?text=Hello">dolor sit amet, consectetur adipisicing elit. Aspernatur odit autem reiciendis, optio laudantium, ab obcaecati quos odio ad vel ut repellat dignissimos, labore. Laborum neque, aliquam atque officia officiis.</p>      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur odit autem reiciendis, optio laudantium, ab obcaecati quos odio ad vel ut repellat dignissimos, labore. Laborum neque, aliquam atque officia officiis.</p>
       <pre>

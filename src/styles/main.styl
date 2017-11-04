@@ -29,8 +29,27 @@ input, button
   vertical-align: baseline
   -webkit-font-smoothing: antialiased
   -moz-osx-font-smoothing: grayscale
+::-webkit-scrollbar
+  width: 5px
+  background: #eee
+::-webkit-scrollbar-thumb
+  background: cr_primary
+button:hover, a:hover
+  cursor: pointer
+.btn
+  margin-left: 0.5rem
+  padding: 5px
+  border: 1px solid cr_min
 
-header
+.header
+  .btn
+    color: #eee
+    &:hover
+      border: 1px solid cr_sub
+      color: cr_sub
+
+header.header
+  z-index:9000
   background: cr_primary
   padding: 0 2%
   position: fixed
@@ -45,25 +64,21 @@ header
     font-size: 2rem
   .lists
     display: none
-  .menu
-    display: none
-    border-radius: 3px
+  .create
     float: right
-    margin-top: 20px
-
-    span
-      width: 25px
-      background: #666
-      height: 3px
-      display: block
-      margin: 3px
+    margin: 17px 0 0 4%
+    color: #FFF
+    font-size: 1.5rem
+    &:before
+      content:'\271a'
+      padding-right: 0.5rem
   .filters
-    float: right
+    float: left
+    margin:0 5%
     li
       display: inline-block
-      padding: 24px 15px
-      a
-        color: #eee
+      padding: 24px 0
+
 
 body
     font-size: 1.4rem
@@ -84,20 +99,60 @@ main
         font-size: 1.5rem
         margin: 7% 15%
         color: #666
+        position: relative
         a
           color: #666
+        button:after
+          display: none
+          cursor: pointer
+          content:'\2715'
+          position: absolute
+          right: 0
+          top: 0
+          font-size: 1rem
+          color: cr_sub
+          &:hover:after
+            display: inline
+        &:hover
+          button:after
+            display: inline
+            &:hover:after
+              display: inline
+
+
   article
     line-height: 1.5
-    padding:1% 4%
+    padding:1% 2% 1% 4%
     margin-top: 83px
     margin-left: 16%
-    .date
-      font-size: 1.2rem
-      color: #666
-      margin-top: -15px
-    h1
-      font-size: 2rem
-      margin: 15px 0
+    header
+      position: relative
+      h1
+        font-size: 2rem
+        margin: 0 0 15px 0
+      .date
+        font-size: 1.2rem
+        color: #666
+        margin-top: -15px
+      .item-menu
+        line-height: 2.3
+        position: absolute
+        right:0
+        top:0
+        & .btn:hover
+          border: 1px solid cr_sub
+        .remove:before, .edit:before, .copy:before
+          color: cr_sub
+          padding-right: 0.5rem
+        .remove:hover:before, .edit:hover:before, .copy:hover:before
+          color:cr_sub
+        .remove:before
+          content:'\2716'
+        .edit:before
+          content: '\270e'
+        .copy:before
+          content: '\2925'
+
     p
       margin: 15px 0
     a
@@ -127,36 +182,35 @@ body:before
   right: 0
   height: 20px
   position: fixed
+  z-index:9000
 
 
 @media (max-width: 600px)
-  header
+  header.header
     .lists
       display: block
       float: right
-      margin-top: 24px
-      font-weight: bold
-      color:#666
+      margin: 17px 0 0 15px
+      color:#FFF
       font-size: 1.5rem
-    .menu
-      display: block
-      &:hover
-        cursor: pointer
-      &:hover ~ ul
-        display: block
+      &:before
+        content: '\274f'
+        padding-right: 0.5rem
     .filters
-      margin-top: 35px
-      text-align: right
-      float: none
       display: none
-      &:hover
-        display:block
-      li
-        display: block
-        padding: 15px 5px
-        a
-          display: block
   main
+    aside.active
+      position: absolute
+      top: 0
+      left: 0
+      // bottom: 0
+      width: 70%
+      background:#FFF
+      z-index: 9999
+      height: auto
+      bottom: auto
+      border-right: 10px solid cr_primary
+      box-shadow: 2px 0 6px 9999px rgba(0, 0, 0, 0.5);
     aside
       display: none
     article
