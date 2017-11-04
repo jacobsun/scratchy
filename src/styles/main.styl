@@ -200,18 +200,21 @@ body:before
       display: none
   main
     aside.active
+      display: block
       position: absolute
       top: 0
       left: 0
-      // bottom: 0
       width: 70%
       background:#FFF
       z-index: 9999
       height: auto
+      height: 100vh
       bottom: auto
-      border-right: 10px solid cr_primary
+      margin-bottom: -5000px
+      padding-bottom: 5000px
       box-shadow: 2px 0 6px 9999px rgba(0, 0, 0, 0.5);
     aside
-      display: none
+      transition: width 0.2s linear
+      width:0
     article
       margin-left: 0
