@@ -10,125 +10,249 @@
   </head>
   <body>
   <header class="header">
-    <h1>Scrachy Note</h1>
-    <ul class="filters">
-      <li><a href="#" class="btn today">Today</a></li>
-      <li><a href="#" class="btn week">Last Week</a></li>
-      <li><a href="#" class="btn month">Last Month</a></li>
-      <li><a href="#" class="btn custom">Select Day</a></li>
-    </ul>
-    <a href="#/new" class="btn create">New</a>
-    <a href="#/lists" class="btn lists">Note List</a>
+    <h1 class="logo">Scrachy Note</h1>
   </header>
   <main>
-    <aside>
-      <section class="sidebar">
-        <ul>
-          <li><a href="#/222">aaa</a><button class="remove"></button></li>
-          <li><a href="#">aaabbb</a><button class="remove"></button></li>
-          <li><a href="#">aaabbbccc</a><button class="remove"></button></li>
-          <li><a href="#">aaabbbcccttt</a><button class="remove"></button></li>
-          <li><a href="#">aaa</a><button class="remove"></button></li>
-          <li><a href="#">aaabbb</a><button class="remove"></button></li>
-          <li><a href="#">aaabbbccc</a><button class="remove"></button></li>
-          <li><a href="#">aaabbbcccttt</a><button class="remove"></button></li>
-          <li><a href="#">aaa</a><button class="remove"></button></li>
-          <li><a href="#">aaabbb</a><button class="remove"></button></li>
-          <li><a href="#">aaabbbccc</a><button class="remove"></button></li>
-          <li><a href="#">aaabbbcccttt</a><button class="remove"></button></li>
-          <li><a href="#">aaa</a><button class="remove"></button></li>
-          <li><a href="#">aaabbb</a><button class="remove"></button></li>
-          <li><a href="#">aaabbbccc</a><button class="remove"></button></li>
-          <li><a href="#">aaabbbcccttt</a><button class="remove"></button></li><li><a href="#">aaa</a><button class="remove"></button></li>
-          <li><a href="#">aaabbb</a><button class="remove"></button></li>
-          <li><a href="#">aaabbbccc</a><button class="remove"></button></li>
-          <li><a href="#">aaabbbcccttt</a><button class="remove"></button></li>
-          <li><a href="#">aaa</a><button class="remove"></button></li>
-          <li><a href="#">aaabbb</a><button class="remove"></button></li>
-          <li><a href="#">aaabbbccc</a><button class="remove"></button></li>
-          <li><a href="#">aaabbbcccttt</a><button class="remove"></button></li>
-          <li><a href="#">aaa</a><button class="remove"></button></li>
-          <li><a href="#">aaabbb</a><button class="remove"></button></li>
-          <li><a href="#">aaabbbccc</a><button class="remove"></button></li>
-          <li><a href="#">aaabbbcccttt</a><button class="remove"></button></li>
-          <li><a href="#">aaa</a><button class="remove"></button></li>
-          <li><a href="#">aaabbb</a><button class="remove"></button></li>
-          <li><a href="#">aaabbbccc</a><button class="remove"></button></li>
-          <li><a href="#">000aaabbbcccttt</a><button class="remove"></button></li>
-        </ul>
-      </section>
-    </aside>
-    <article>
-      <header>
-        <h1>This is title</h1>
-        <p class="date">2017年11月4日00:39:28</p>
-        <section class="item-menu">
-          <a href="#" class="btn remove">REMOVE</a>
-          <a href="#" class="btn edit">EDIT</a>
-          <a href="#" class="btn copy">COPY</a>
-        </section>
-      </header>
-
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt consequatur dicta enim fugiat, inventore illo, quae omnis deleniti magnam, quas placeat in assumenda repellendus necessitatibus labore fugit. Modi, soluta vel.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. <a href="#">good stuff</a> Natus laborum non nobis odio velit provident blanditiis cupiditate ratione veritatis iure quod totam dolorem quasi sed rem, minus. Eos, vitae, enim!</p>
-      <ul>
-        <li>aaat st<button class="remove"></button></li>
-        <li>aaat st<button class="remove"></button></li>
-        <li>aaat st<button class="remove"></button></li>
-        <li>aaatr t<button class="remove"></button></li>
+    <aside class="side tree-container">
+      <div class="create">
+        <a href="#" class="btn create">Create</a>
+      </div>
+      <ul class="tree">
+        <li class="tree-item expandable expanded">
+          <div class="tree-node">
+            <a href="#">Folder 1</a></div>
+          <div class="sub-node">
+            <ul class="tree">
+              <li class="tree-item expandable expanded">
+                <div class="tree-node">
+                  <a href="#">Folder 1-1</a></div>
+                <div class="sub-node">
+                  <ul class="tree">
+                    <li class="tree-item">
+                      <div class="tree-node">
+                        <a href="#">Folder 1-1-1</a></div>
+                    </li>
+                    <li class="tree-item">
+                      <div class="tree-node">
+                        <a href="#">Folder 1-1-2</a></div>
+                    </li>
+                    <li class="tree-item">
+                      <div class="tree-node">
+                        <a href="#">Folder 1-1-3</a></div>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+              <li class="tree-item">
+                <div class="tree-node">
+                  <a href="#">Folder 1-2</a></div>
+              </li>
+              <li class="tree-item">
+                <div class="tree-node">
+                  <a href="#">Folder 1-3</a></div>
+              </li>
+            </ul>
+          </div>
+        </li>
+        <li class="tree-item expandable expanded">
+          <div class="tree-node">
+            <a href="#">Folder 2</a></div>
+          <div class="sub-node">
+            <ul class="tree">
+              <li class="tree-item">
+                <div class="tree-node">
+                  <a href="#">Folder 2-1</a></div>
+              </li>
+              <li class="tree-item">
+                <div class="tree-node">
+                  <a href="#">Folder 2-2</a></div>
+              </li>
+              <li class="tree-item">
+                <div class="tree-node">
+                  <a href="#">Folder 2-3</a></div>
+              </li>
+            </ul>
+          </div>
+        </li>
+        <li class="tree-item expandable">
+          <div class="tree-node">
+            <a href="#">Folder 3</a></div>
+          <div class="sub-node">
+            <ul class="tree">
+              <li class="tree-item">
+                <div class="tree-node">
+                  <a href="#">Folder 3-1</a></div>
+              </li>
+              <li class="tree-item">
+                <div class="tree-node">
+                  <a href="#">Folder 3-2</a></div>
+              </li>
+              <li class="tree-item">
+                <div class="tree-node">
+                  <a href="#">Folder 3-3</a></div>
+              </li>
+            </ul>
+          </div>
+        </li>
       </ul>
-      <ol>
-        <li>aaat st<button class="remove"></button></li>
-        <li>aaat st<button class="remove"></button></li>
-        <li>aaat st<button class="remove"></button></li>
-        <li>aaatr t<button class="remove"></button></li>
-      </ol>
-      <p>Lorem ipsum <img src="http://fakeimg.pl/350x200/?text=Hello">dolor sit amet, consectetur adipisicing elit. Aspernatur odit autem reiciendis, optio laudantium, ab obcaecati quos odio ad vel ut repellat dignissimos, labore. Laborum neque, aliquam atque officia officiis.</p>      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur odit autem reiciendis, optio laudantium, ab obcaecati quos odio ad vel ut repellat dignissimos, labore. Laborum neque, aliquam atque officia officiis.</p>
-      <pre>
-        <code>
-          export const activate = arr => {
-            arr.forEach(feature => {
-              if (feature._from) {
-                delegate(feature._selector, feature._from, feature._action, (evt) => {
-                  if (feature._keyCode feature._keyCode !== evt.keyCode) return
-                  feature._do(evt)
-                  if (feature._lastly) feature._lastly(evt)
-                }, feature._action === 'blur')
-              } else {
-                on(feature._selector, feature._action, (evt) => {
-                  if (feature._keyCodefeature._keyCode !== evt.keyCode) return
-                  feature._do(evt)
-                  if (feature._lastly) feature._lastly(evt)
-                }, feature._action === 'blur')
-              }
-            })
-          }
-        </code>
-      </pre>
+    </aside>
+    <aside class="side list-container">
+      <div class="search">
+        <button></button> <input type="text" name="search" placeholder="Search...">
+      </div>
+      <ul>
+        <li><a href="#">created a repository</a><span class="create-date">2017-11-5</span></span><button class="remove"></button></li>
+        <li><a href="#">created a repository</a><span class="create-date">2017-11-5</span></span><button class="remove"></button></li>
+        <li><a href="#">created a repository</a><span class="create-date">2017-11-5</span></span><button class="remove"></button></li>
+        <li><a href="#">created a repository</a><span class="create-date">2017-11-5</span></span><button class="remove"></button></li>
+        <li><a href="#">created a repository</a><span class="create-date">2017-11-5</span></span><button class="remove"></button></li>
+        <li><a href="#">created a repository</a><span class="create-date">2017-11-5</span></span><button class="remove"></button></li>
+        <li><a href="#">created a repository</a><span class="create-date">2017-11-5</span></span><button class="remove"></button></li>
+        <li><a href="#">created a repository</a><span class="create-date">2017-11-5</span></span><button class="remove"></button></li>
+        <li><a href="#">created a repository</a><span class="create-date">2017-11-5</span></span><button class="remove"></button></li>
+        <li><a href="#">created a repository</a><span class="create-date">2017-11-5</span></span><button class="remove"></button></li>
+        <li><a href="#">created a repository</a><span class="create-date">2017-11-5</span></span><button class="remove"></button></li>
+        <li><a href="#">created a repository</a><span class="create-date">2017-11-5</span></span><button class="remove"></button></li>
+        <li><a href="#">created a repository</a><span class="create-date">2017-11-5</span></span><button class="remove"></button></li>
+        <li><a href="#">created a repository</a><span class="create-date">2017-11-5</span></span><button class="remove"></button></li>
+        <li><a href="#">created a repository</a><span class="create-date">2017-11-5</span></span><button class="remove"></button></li>
+        <li><a href="#">created a repository</a><span class="create-date">2017-11-5</span></span><button class="remove"></button></li>
+        <li><a href="#">created a repository</a><span class="create-date">2017-11-5</span></span><button class="remove"></button></li>
+        <li><a href="#">created a repository</a><span class="create-date">2017-11-5</span></span><button class="remove"></button></li>
+        <li><a href="#">created a repository</a><span class="create-date">2017-11-5</span></span><button class="remove"></button></li>
+        <li><a href="#">created a repository</a><span class="create-date">2017-11-5</span></span><button class="remove"></button></li>
+        <li><a href="#">created a repository</a><span class="create-date">2017-11-5</span></span><button class="remove"></button></li>
+        <li><a href="#">created a repository</a><span class="create-date">2017-11-5</span></span><button class="remove"></button></li>
+        <li><a href="#">created a repository</a><span class="create-date">2017-11-5</span></span><button class="remove"></button></li>
+        <li><a href="#">created a repository</a><span class="create-date">2017-11-5</span></span><button class="remove"></button></li>
+        <li><a href="#">created a repository</a><span class="create-date">2017-11-5</span></span><button class="remove"></button></li>
+        <li><a href="#">created a repository</a><span class="create-date">2017-11-5</span></span><button class="remove"></button></li>
+        <li><a href="#">created a repository</a><span class="create-date">2017-11-5</span></span><button class="remove"></button></li>
+        <li><a href="#">created a repository</a><span class="create-date">2017-11-5</span></span><button class="remove"></button></li>
+        <li><a href="#">created a repository</a><span class="create-date">2017-11-5</span></span><button class="remove"></button></li>
+        <li><a href="#">created a repository</a><span class="create-date">2017-11-5</span></span><button class="remove"></button></li>
+        <li><a href="#">created a repository</a><span class="create-date">2017-11-5</span></span><button class="remove"></button></li>
+        <li><a href="#">created a repository</a><span class="create-date">2017-11-5</span></span><button class="remove"></button></li>
+        <li><a href="#">created a repository</a><span class="create-date">2017-11-5</span></span><button class="remove"></button></li>
+        <li><a href="#">created a repository</a><span class="create-date">2017-11-5</span></span><button class="remove"></button></li>
+        <li><a href="#">created a repository</a><span class="create-date">2017-11-5</span></span><button class="remove"></button></li>
+        <li><a href="#">created a repository</a><span class="create-date">2017-11-5</span></span><button class="remove"></button></li>
+        <li><a href="#">created a repository</a><span class="create-date">2017-11-5</span></span><button class="remove"></button></li>
+        <li><a href="#">created a repository</a><span class="create-date">2017-11-5</span></span><button class="remove"></button></li>
+        <li><a href="#">created a repository</a><span class="create-date">2017-11-5</span></span><button class="remove"></button></li>
+        <li><a href="#">created a repository</a><span class="create-date">2017-11-5</span></span><button class="remove"></button></li>
+        <li><a href="#">created a repository</a><span class="create-date">2017-11-5</span></span><button class="remove"></button></li>
+        <li><a href="#">created a repository</a><span class="create-date">2017-11-5</span></span><button class="remove"></button></li>
+        <li><a href="#">created a repository</a><span class="create-date">2017-11-5</span></span><button class="remove"></button></li>
+        <li><a href="#">created a repository</a><span class="create-date">2017-11-5</span></span><button class="remove"></button></li>
+        <li><a href="#">created a repository</a><span class="create-date">2017-11-5</span></span><button class="remove"></button></li>
+        <li><a href="#">created a repository</a><span class="create-date">2017-11-5</span></span><button class="remove"></button></li>
+        <li><a href="#">created a repository</a><span class="create-date">2017-11-5</span></span><button class="remove"></button></li>
+        <li><a href="#">created a repository</a><span class="create-date">2017-11-5</span></span><button class="remove"></button></li>
+      </ul>
+    </aside>
+    <article class="content-container">
+      <header>
+        <h1 class="title">Repositories</h1>
+        <ul class="control">
+          <li><a href="#" class="btn edit">Edit</a></li>
+          <li><a href="#" class="btn remove">Remove</a></li>
+          <li><a href="#" class="btn copy">Copy</a></li>
+        </ul>
+      </header>
+      <div class="content">
+        <h2>Other title</h2>
+        <ul>
+          <li>foo</li>
+          <li>bar</li>
+          <li>baz</li>
+        </ul>
+        <ol>
+          <li>foo</li>
+          <li>bar</li>
+          <li>baz</li>
+        </ol>
+        <a href="#">Link</a>
 
+        <p>Lorem <img src="http://fakeimg.pl/350x200/?text=Hello"> ipsum dolor sit amet consectetur adipisicing elit. Voluptatem vitae, eos totam impedit maiores amet quaerat rerum iusto asperiores eveniet voluptatum dolorem praesentium! Quas, at animi itaque quam dolore corrupti.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem vitae, eos totam impedit maiores amet quaerat rerum iusto asperiores eveniet voluptatum dolorem praesentium! Quas, at animi itaque quam dolore corrupti.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem vitae, eos totam impedit maiores amet quaerat rerum iusto asperiores eveniet voluptatum dolorem praesentium! Quas, at animi itaque quam dolore corrupti.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem vitae, eos totam impedit maiores amet quaerat rerum iusto asperiores eveniet voluptatum dolorem praesentium! Quas, at animi itaque quam dolore corrupti.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem vitae, eos totam impedit maiores amet quaerat rerum iusto asperiores eveniet voluptatum dolorem praesentium! Quas, at animi itaque quam dolore corrupti.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem vitae, eos totam impedit maiores amet quaerat rerum iusto asperiores eveniet voluptatum dolorem praesentium! Quas, at animi itaque quam dolore corrupti.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem vitae, eos totam impedit maiores amet quaerat rerum iusto asperiores eveniet voluptatum dolorem praesentium! Quas, at animi itaque quam dolore corrupti.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem vitae, eos totam impedit maiores amet quaerat rerum iusto asperiores eveniet voluptatum dolorem praesentium! Quas, at animi itaque quam dolore corrupti.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem vitae, eos totam impedit maiores amet quaerat rerum iusto asperiores eveniet voluptatum dolorem praesentium! Quas, at animi itaque quam dolore corrupti.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem vitae, eos totam impedit maiores amet quaerat rerum iusto asperiores eveniet voluptatum dolorem praesentium! Quas, at animi itaque quam dolore corrupti.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem vitae, eos totam impedit maiores amet quaerat rerum iusto asperiores eveniet voluptatum dolorem praesentium! Quas, at animi itaque quam dolore corrupti.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem vitae, eos totam impedit maiores amet quaerat rerum iusto asperiores eveniet voluptatum dolorem praesentium! Quas, at animi itaque quam dolore corrupti.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem vitae, eos totam impedit maiores amet quaerat rerum iusto asperiores eveniet voluptatum dolorem praesentium! Quas, at animi itaque quam dolore corrupti.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem vitae, eos totam impedit maiores amet quaerat rerum iusto asperiores eveniet voluptatum dolorem praesentium! Quas, at animi itaque quam dolore corrupti.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem vitae, eos totam impedit maiores amet quaerat rerum iusto asperiores eveniet voluptatum dolorem praesentium! Quas, at animi itaque quam dolore corrupti.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem vitae, eos totam impedit maiores amet quaerat rerum iusto asperiores eveniet voluptatum dolorem praesentium! Quas, at animi itaque quam dolore corrupti.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem vitae, eos totam impedit maiores amet quaerat rerum iusto asperiores eveniet voluptatum dolorem praesentium! Quas, at animi itaque quam dolore corrupti.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem vitae, eos totam impedit maiores amet quaerat rerum iusto asperiores eveniet voluptatum dolorem praesentium! Quas, at animi itaque quam dolore corrupti.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem vitae, eos totam impedit maiores amet quaerat rerum iusto asperiores eveniet voluptatum dolorem praesentium! Quas, at animi itaque quam dolore corrupti.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem vitae, eos totam impedit maiores amet quaerat rerum iusto asperiores eveniet voluptatum dolorem praesentium! Quas, at animi itaque quam dolore corrupti.</p>
+        <pre>
+          <code>
+            var body = document.getElementsByTagName('body')[0]
+            body.addEventListener('click', function (evt) {
+              if (evt.target === menuEl) {
+                aside.className = aside.className === 'active' ? '' : 'active'
+                return false
+              }
+              aside.className = ''
+              return false
+            }, false)
+          </code>
+        </pre>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem vitae, eos totam impedit maiores amet quaerat rerum iusto asperiores eveniet voluptatum dolorem praesentium! Quas, at animi itaque quam dolore corrupti.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem vitae, eos totam impedit maiores amet quaerat rerum iusto asperiores eveniet voluptatum dolorem praesentium! Quas, at animi itaque quam dolore corrupti.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem vitae, eos totam impedit maiores amet quaerat rerum iusto asperiores eveniet voluptatum dolorem praesentium! Quas, at animi itaque quam dolore corrupti.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem vitae, eos totam impedit maiores amet quaerat rerum iusto asperiores eveniet voluptatum dolorem praesentium! Quas, at animi itaque quam dolore corrupti.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem vitae, eos totam impedit maiores amet quaerat rerum iusto asperiores eveniet voluptatum dolorem praesentium! Quas, at animi itaque quam dolore corrupti.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem vitae, eos totam impedit maiores amet quaerat rerum iusto asperiores eveniet voluptatum dolorem praesentium! Quas, at animi itaque quam dolore corrupti.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem vitae, eos totam impedit maiores amet quaerat rerum iusto asperiores eveniet voluptatum dolorem praesentium! Quas, at animi itaque quam dolore corrupti.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem vitae, eos totam impedit maiores amet quaerat rerum iusto asperiores eveniet voluptatum dolorem praesentium! Quas, at animi itaque quam dolore corrupti.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem vitae, eos totam impedit maiores amet quaerat rerum iusto asperiores eveniet voluptatum dolorem praesentium! Quas, at animi itaque quam dolore corrupti.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem vitae, eos totam impedit maiores amet quaerat rerum iusto asperiores eveniet voluptatum dolorem praesentium! Quas, at animi itaque quam dolore corrupti.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem vitae, eos totam impedit maiores amet quaerat rerum iusto asperiores eveniet voluptatum dolorem praesentium! Quas, at animi itaque quam dolore corrupti.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem vitae, eos totam impedit maiores amet quaerat rerum iusto asperiores eveniet voluptatum dolorem praesentium! Quas, at animi itaque quam dolore corrupti.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem vitae, eos totam impedit maiores amet quaerat rerum iusto asperiores eveniet voluptatum dolorem praesentium! Quas, at animi itaque quam dolore corrupti.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem vitae, eos totam impedit maiores amet quaerat rerum iusto asperiores eveniet voluptatum dolorem praesentium! Quas, at animi itaque quam dolore corrupti.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem vitae, eos totam impedit maiores amet quaerat rerum iusto asperiores eveniet voluptatum dolorem praesentium! Quas, at animi itaque quam dolore corrupti.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem vitae, eos totam impedit maiores amet quaerat rerum iusto asperiores eveniet voluptatum dolorem praesentium! Quas, at animi itaque quam dolore corrupti.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem vitae, eos totam impedit maiores amet quaerat rerum iusto asperiores eveniet voluptatum dolorem praesentium! Quas, at animi itaque quam dolore corrupti.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem vitae, eos totam impedit maiores amet quaerat rerum iusto asperiores eveniet voluptatum dolorem praesentium! Quas, at animi itaque quam dolore corrupti.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem vitae, eos totam impedit maiores amet quaerat rerum iusto asperiores eveniet voluptatum dolorem praesentium! Quas, at animi itaque quam dolore corrupti.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem vitae, eos totam impedit maiores amet quaerat rerum iusto asperiores eveniet voluptatum dolorem praesentium! Quas, at animi itaque quam dolore corrupti.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem vitae, eos totam impedit maiores amet quaerat rerum iusto asperiores eveniet voluptatum dolorem praesentium! Quas, at animi itaque quam dolore corrupti.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem vitae, eos totam impedit maiores amet quaerat rerum iusto asperiores eveniet voluptatum dolorem praesentium! Quas, at animi itaque quam dolore corrupti.</p>
+      </div>
     </article>
   </main>
 <!--     <script src="dist/manifest.js"></script>
     <script src="dist/vendor.js"></script> -->
     <script src="dist/app.js"></script>
     <script>
-      var menuEl = document.getElementsByClassName('lists')[0]
-      var aside = document.getElementsByTagName('aside')[0]
+      // var menuEl = document.getElementsByClassName('lists')[0]
+      // var aside = document.getElementsByTagName('aside')[0]
 
-      var body = document.getElementsByTagName('body')[0]
-      body.addEventListener('click', function (evt) {
-        if (evt.target === menuEl) {
-          aside.className = aside.className === 'active' ? '' : 'active'
-          return false
-        }
-        aside.className = ''
-        return false
-      }, false)
+      // var body = document.getElementsByTagName('body')[0]
+      // body.addEventListener('click', function (evt) {
+      //   if (evt.target === menuEl) {
+      //     aside.className = aside.className === 'active' ? '' : 'active'
+      //     return false
+      //   }
+      //   aside.className = ''
+      //   return false
+      // }, false)
 
-      aside.addEventListener('click', function (evt) {
-        evt.stopPropagation()
-        return false
-      }, false)
+      // aside.addEventListener('click', function (evt) {
+      //   evt.stopPropagation()
+      //   return false
+      // }, false)
 
     </script>
   </body>
