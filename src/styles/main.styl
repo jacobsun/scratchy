@@ -53,13 +53,15 @@ button:hover, a:hover
   cursor: pointer
 a
   color: cr_sub
-// .btn
-//   margin-left: 0.5rem
-//   padding: 5px
-//   border: 1px solid cr_min
-//   color: #eee
-//   &:hover
-//     border: 1px solid cr_sub
+.btn
+  font-size: 14px
+  color: cr_text_primary
+  display: block
+  text-align: center
+  border: 1px solid cr_primary
+  padding: 1rem 0
+  &:hover
+    border: 1px solid cr_text_primary
 body:before
   background: #FFF
   content: ''
@@ -98,22 +100,15 @@ aside
   left: 0
   .create
     margin: 12px 0 1.5rem 0
-    a
-      font-size: 14px
-      color: cr_text_primary
-      display: block
-      text-align: center
-      border: 1px solid cr_primary
-      padding: 1rem 0
-      &:hover
-        border: 1px solid cr_text_primary
 .tree
-  .tree-item .sub-node
-    display: none
-  .expanded .sub-node
-    display: block
   li
     display: block
+  .sub-node li
+    display: none
+  .expanded > .sub-node > .tree > li
+    display: block
+
+
   a
     color: #333
     display: block
@@ -198,25 +193,24 @@ aside
     font-size: 10px
     display: inline-block
 
-article
-  padding: 12px 36px
+.content-container
+  padding: 0 36px
   margin: 83px 0 0 432px
   min-width: 500px
-
+  .btn
+    display: inline-block
+    padding: 1rem 1rem
+    &:before
+      padding: 0 3px 0 0
+      display: inline-block
   header
     position: relative
-  .control
-    position: absolute
-    top: 3px
-    right: 0
-    li
-      display: inline-block
-      margin: 0 0 0 1rem
-      a
-        display: inline-block
-        &:before
-          padding: 0 3px 0 0
-          display: inline-block
+    h1
+      padding: 1rem 0
+    .control
+      position: absolute
+      top: 1rem
+      right: 0
       .edit:before
         content: '\270f'
         transform: rotate(45deg)
@@ -224,16 +218,100 @@ article
         content: '\2326'
       .copy:before
         content: '\2398'
+  .content-body
+    h1, h2, h3, h4, h5, h6
+      margin:  0 0 1rem 0
+    ul, ol, dl
+      margin: 0 0 1.5rem 1.5rem
+    ul
+      list-style-type: circle
+    ol
+      list-style-type:lower-roman
+    p
+      margin: 1rem 0
+    a
+      color: cr_text_primary
 
-  h1, h2, h3, h4, h5, h6
-    margin:  0 0 1rem 0
-  ul, ol, dl
-    margin: 0 0 1.5rem 1.5rem
-  ul
-    list-style-type: circle
-  ol
-    list-style-type:lower-roman
-  p
-    margin: 1rem 0
-  a
-    color: cr_text_primary
+.editor
+  .editor-control
+    position: relative
+    overflow: hidden
+    margin-bottom: 2rem
+    .select
+      width: 50%
+      float: left
+      position: relative
+      &:after
+        content: ''
+        position: absolute
+        top: 42%
+        right: 5%
+        width: 0
+        height: 0
+        border-style: solid
+        border-width: 5px 5px 0 5px
+        border-color: cr_text_primary transparent transparent transparent
+    .select-folder
+      -webkit-appearance: none
+      color: cr_text
+      border: 1px solid cr_primary
+      width: 100%
+      display: inline-block
+      padding: 1rem 3px
+      outline: none
+    .editor-menu
+      float: right
+
+  textarea
+    width: 100%
+    outline: none
+
+.content-container
+  .editor
+    display: none
+.content-container.edit
+  .editor
+    display: block
+    .editor-control
+      padding: 1rem 0 0 0
+  .content
+    display: none
+
+.overlay
+  &:after
+    content: ''
+    position: fixed
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    background: #333
+    opacity: .7
+    z-index: -1000
+  display: none
+  position: fixed
+  width: 100%
+  padding: 1rem
+  top: 20%
+  left: 0
+  text-align: center
+  z-index: 9999
+  .box
+    position: relative
+    padding: 1rem
+    text-align: left
+    background: #FFF
+    width: 30%
+    margin: 0 auto
+    border-radius: 2px
+    .control
+      float: right
+  input
+    border: 1px solid cr_text_primary
+    padding: 1rem
+    margin: 0 auto
+  .btn
+    display: inline-block
+    padding: 1rem 1rem
+.overlay.active
+  display: block

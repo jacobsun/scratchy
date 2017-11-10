@@ -2,6 +2,10 @@ export function qs (selector, scope = document) {
   return scope.querySelector(selector)
 }
 
+export function qsa (selector, scope = document) {
+  return scope.querySelectorAll(selector)
+}
+
 export function on (target, type, cb, capture = false) {
   if (typeof target === 'string') target = document.querySelector(target)
   target.addEventListener(type, cb, capture)

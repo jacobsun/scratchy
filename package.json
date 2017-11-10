@@ -41,6 +41,7 @@
     "webpack-dev-server": "^2.9.4"
   },
   "dependencies": {
-    "normalize.css": "^7.0.0"
+    "normalize.css": "^7.0.0",
+    "sr-store": "^1.0.0"
   }
 }
