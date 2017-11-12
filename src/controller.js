@@ -1,4 +1,3 @@
-// import {qsa} from './module/helpers'
 export default class Controller {
   constructor (view, model) {
     this.view = view
@@ -6,11 +5,12 @@ export default class Controller {
     this.view.bindToggleFolder()
     this.view.bindCreate(this.create)
     this.view.bindSave(this.save.bind(this))
-    this.view.bindComfirmOverlay(this.saveOverlayInput.bind(this))
+    this.view.bindConfirmOverlay(this.saveOverlayInput.bind(this))
+    this.data = this.model.data()
   }
 
-  render (id) {
-    console.log('id: ', id)
+  render () {
+    this.view.updateFolder(this.data)
   }
 
   create (target) {
@@ -29,6 +29,11 @@ export default class Controller {
   }
 
   saveOverlayInput (data) {
-    console.log(data)
+    this.model.newFolder(data, 0, (err, data) => {
+      if (err) {
+        return this.view.overlayError()
+      }
+      this.view.updateFolder(data)
+    })
   }
 }

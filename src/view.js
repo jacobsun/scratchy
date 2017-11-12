@@ -1,6 +1,7 @@
 import {on, qs, qsa, delegate} from './module/helpers'
 export default class View {
-  constructor () {
+  constructor (template) {
+    this.template = template
     this.doms = {
       body: qs('body'),
       create: qs('.create'),
@@ -11,9 +12,11 @@ export default class View {
       overlay: qs('.overlay'),
       overlayCancel: qs('.overlay-cancel'),
       overlayConfirm: qs('.overlay-confirm'),
-      overlayInput: qs('input', this.doms.overlay)
+      overlayInput: qs('.overlay input')
     }
+    this.bindSelect()
     this.bindCancelOverlay()
+    this.bindOverlayInput()
   }
 
   bindToggleFolder (cb) {
@@ -62,14 +65,34 @@ export default class View {
 
   bindConfirmOverlay (cb) {
     on(this.doms.overlayConfirm, 'click', (evt) => {
-      this.CancelOverlay()
-      cb(this.doms.overlayInput.value)
+      let v = this.doms.overlayInput.value.trim()
+      if (v.length > 0) {
+        cb(v)
+      }
     }, false)
+  }
+  bindOverlayInput () {
+    on(this.doms.overlayInput, 'input', ({ target }) => {
+      this.overlayErrorClear()
+    })
   }
   CancelOverlay () {
     this.doms.overlay.classList.remove('active')
   }
   activeOverlay () {
     this.doms.overlay.classList.add('active')
+    this.doms.overlayInput.focus()
+  }
+  overlayError () {
+    this.doms.overlay.classList.add('error')
+  }
+  overlayErrorClear () {
+    this.doms.overlay.classList.remove('error')
+  }
+  updateFolder (data) {
+    this.doms.overlayInput.value = ''
+    this.CancelOverlay()
+    this.doms.selectFolder.innerHTML = this.template.selectContent(data)
+    // this.doms.tree.innerHTML = this.template.treeContent(data)
   }
 }
