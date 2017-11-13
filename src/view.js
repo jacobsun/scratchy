@@ -13,7 +13,8 @@ export default class View {
       overlayCancel: qs('.overlay-cancel'),
       overlayConfirm: qs('.overlay-confirm'),
       overlayInput: qs('.overlay input'),
-      tree: qs('.tree-container > .tree')
+      tree: qs('.tree-container > .tree'),
+      noteLists: qs('.list-container ul')
     }
     this.bindSelect()
     this.bindCancelOverlay()
@@ -25,13 +26,20 @@ export default class View {
   bindToggleFolder (cb) {
     delegate(this.doms.body, '.item-title', 'click', ({ target }) => {
       let $treeItem = target.parentNode.parentNode
-      if (!$treeItem.classList.contains('expandable')) return
+      if (!$treeItem.classList.contains('expandable')) {
+        return cb(target.dataset.name)
+      }
       $treeItem.classList.toggle('expanded')
       let childItems = qsa('.tree-item', $treeItem)
       Array.prototype.forEach.call(childItems, item => {
         item.classList.remove('expanded')
       })
+      cb(target.dataset.name)
     }, false)
+  }
+
+  updateNoteList (data) {
+    this.doms.noteLists.innerHTML = this.template.noteLists(data)
   }
 
   bindCreate (cb) {

@@ -14,16 +14,37 @@ export default class Model {
   }
   newNote (payload, cb) {
     let note = this._makeNote(payload)
-    this.store.insert(note)
-    cb(note)
+    let data = this.data()
+    if (payload.folder === 'root') {
+      data.root.push(note)
+    } else {
+      this.findFolder(data, payload.folder, folder => {
+        console.log('folder', folder)
+        folder.root.push(note)
+      })
+    }
+    this.sync(data)
+    cb(data)
+  }
+
+  findFolder (data, folder, cb) {
+    let keys = Object.keys(data)
+    for (let i = keys.length - 1; i >= 0; i--) {
+      let key = keys[i]
+      if (folder === key) {
+        cb(data[key])
+      } else if (Object.keys(data[key]).length > 1) {
+        return this.findFolder(data[key], folder, cb)
+      }
+    }
+    return null
   }
 
   _makeNote (payload) {
     return {
       id: Date.now(),
       title: this._generateTitle(payload.data),
-      content: payload.data,
-      folder: payload.folder
+      content: payload.data
     }
   }
 
@@ -108,6 +129,24 @@ export default class Model {
     let ret = this._createSub(parent, name, data)
     if (!ret) this.sync(data)
     cb(ret, data)
+  }
+
+  filterFolder (name) {
+    let data = this.data()
+    return this._filterFolder(data, name)
+  }
+
+  _filterFolder (data, name) {
+    let keys = Object.keys(data)
+    for (let i = keys.length - 1; i >= 0; i--) {
+      let key = keys[i]
+      if (name === key) {
+        return data[key]
+      } else if (Object.keys(data[key]).length > 1) {
+        return this._filterFolder(data[key], name)
+      }
+    }
+    return null
   }
 
   _createSub (parent, name, data) {

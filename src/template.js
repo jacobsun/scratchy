@@ -57,4 +57,13 @@ export default class Template {
     })
     return str
   }
+
+  noteLists (data) {
+    console.log(data)
+    return data.root.reduce((cnt, note) => {
+      cnt += `<li><a href="#" data-id="${note.id}">${note.title}</a><span class="create-date">${new Date(Date.now()).toLocaleDateString()}</span></span><button class="remove"></button></li>
+`
+      return cnt
+    }, '')
+  }
 }
