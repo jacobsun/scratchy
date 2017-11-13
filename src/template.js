@@ -33,4 +33,28 @@ export default class Template {
     })
     return str
   }
+
+  treeContent (data) {
+    let str = ''
+    return this.treeItems(str, data)
+  }
+
+  treeItems (str, data) {
+    Object.keys(data).forEach(k => {
+      if (k === '_name' || k === 'root') return
+      let hasSub = Object.keys(data[k]).length > 1
+      str += `
+<li class="tree-item ${hasSub ? 'expandable' : ''}">
+  <div class="tree-node">
+    <a href="#" data-name="${k}" class="item-title">${k}<div class="folder-control"><i class="rename-folder"></i><i class="create-sub"></i><i class="remove-folder"></i></div></a>
+  </div>`
+      if (hasSub) {
+        str += '<div class="sub-node"><ul class="tree">'
+        str = this.treeItems(str, data[k])
+        str += '</ul></div>'
+      }
+      str += '</li>'
+    })
+    return str
+  }
 }

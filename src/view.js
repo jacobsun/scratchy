@@ -12,16 +12,20 @@ export default class View {
       overlay: qs('.overlay'),
       overlayCancel: qs('.overlay-cancel'),
       overlayConfirm: qs('.overlay-confirm'),
-      overlayInput: qs('.overlay input')
+      overlayInput: qs('.overlay input'),
+      tree: qs('.tree-container > .tree')
     }
     this.bindSelect()
     this.bindCancelOverlay()
     this.bindOverlayInput()
+    this.bindFolderRename()
+    this.bindFolderSub()
   }
 
   bindToggleFolder (cb) {
     delegate(this.doms.body, '.item-title', 'click', ({ target }) => {
       let $treeItem = target.parentNode.parentNode
+      if (!$treeItem.classList.contains('expandable')) return
       $treeItem.classList.toggle('expanded')
       let childItems = qsa('.tree-item', $treeItem)
       Array.prototype.forEach.call(childItems, item => {
@@ -67,7 +71,7 @@ export default class View {
     on(this.doms.overlayConfirm, 'click', (evt) => {
       let v = this.doms.overlayInput.value.trim()
       if (v.length > 0) {
-        cb(v)
+        cb(this.parentName, this.oldName, v)
       }
     }, false)
   }
@@ -90,9 +94,33 @@ export default class View {
     this.doms.overlay.classList.remove('error')
   }
   updateFolder (data) {
+    this.parentName = ''
+    this.oldName = ''
     this.doms.overlayInput.value = ''
     this.CancelOverlay()
     this.doms.selectFolder.innerHTML = this.template.selectContent(data)
-    // this.doms.tree.innerHTML = this.template.treeContent(data)
+  }
+  updateTree (data) {
+    this.doms.tree.innerHTML = this.template.treeContent(data)
+  }
+
+  bindFolderRename () {
+    delegate(this.doms.body, '.rename-folder', 'click', ({target}) => {
+      this.oldName = target.parentNode.parentNode.dataset.name
+      this.activeOverlay()
+    }, false)
+  }
+
+  bindFolderRemove (cb) {
+    delegate(this.doms.body, '.remove-folder', 'click', ({target}) => {
+      cb(target.parentNode.parentNode.dataset.name)
+    }, false)
+  }
+
+  bindFolderSub (cb) {
+    delegate(this.doms.body, '.create-sub', 'click', ({ target }) => {
+      this.parentName = target.parentNode.parentNode.dataset.name
+      this.activeOverlay()
+    }, false)
   }
 }

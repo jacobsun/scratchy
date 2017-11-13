@@ -114,6 +114,27 @@ aside
     display: block
     padding: .5rem 0
     margin: 0 0 0 1.5rem
+  .item-title
+    border-bottom: 1px solid transparent
+    overflow: hidden
+    .folder-control
+      display: none
+      float: right
+    .rename-folder, .create-sub, .remove-folder
+      color: cr_text_primary
+      margin: auto 5px
+      font-style: normal
+    .create-sub:after
+      content: '\1F4C1'
+    .rename-folder:after
+      content: '\270F'
+    .remove-folder:after
+      content: '\2715'
+    &:hover
+      .folder-control
+        display: inline-block
+      border-bottom: 1px solid cr_text_primary
+
   .sub-node
     margin: 0 0 0 1.5rem
   .tree-node
@@ -158,8 +179,7 @@ aside
     display: block
     padding: 0.5rem 0
     position: relative
-    // &:first-child
-    //   padding-top: 0
+    border-bottom: 1px solid transparent
     .remove
       display: none
       padding: 0
@@ -173,10 +193,12 @@ aside
         padding: 0
         margin: 0
         content: '\2715 Remove'
-    &:hover .create-date
-      display: none
-    &:hover .remove
-      display: inline-block
+    &:hover
+      border-bottom: 1px solid cr_text_primary
+      .create-date
+        display: none
+      .remove
+        display: inline-block
   a
     font-size: 1.5rem
     color: #333
