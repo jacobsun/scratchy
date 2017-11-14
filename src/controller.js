@@ -6,12 +6,18 @@ export default class Controller {
     this.view.bindCreate(this.create)
     this.view.bindSave(this.save.bind(this))
     this.view.bindConfirmOverlay(this.saveOverlayInput.bind(this))
-    this.view.bindFolderRemove(this.folderRemove.bind(this))
-    this.data = this.model.data()
+    this.view.bindFolderRemove(this.removeFolder.bind(this))
   }
 
+  init () {
+    this.model.getData(data => {
+      this.view.updateSelectFolder(data)
+      this.view.updateTree(data)
+      this.view.updateNoteList(data)
+    })
+  }
   render (data) {
-    this.view.updateFolder(data)
+    this.view.updateSelectFolder(data)
     this.view.updateTree(data)
     this.view.updateNoteList(data)
   }
@@ -20,9 +26,12 @@ export default class Controller {
 
   }
 
-  filterNotes (name) {
-    this.view.updateNoteList(this.model.filterFolder(name))
+  filterNotes (id) {
+    this.model.getFolder(id, folder => {
+      this.view.updateNoteList(folder)
+    })
   }
+
   save (raw, folder) {
     let data = raw.trim()
     if (data.length < 1) return
@@ -33,28 +42,18 @@ export default class Controller {
 
   saveOverlayInput (parent, old, newName) {
     if (old) {
-      this.model.renameFolder(old, newName, (err, data) => {
-        if (err) return this.view.overlayError()
-        this.render(data)
-      })
-    } else if (parent) {
-      this.model.createSub(parent, newName, (err, data) => {
-        if (err) return this.view.overlayError()
+      this.model.renameFolder(old, newName, data => {
         this.render(data)
       })
     } else {
-      this.model.newFolder(newName, 0, (err, data) => {
-        if (err) {
-          return this.view.overlayError()
-        }
+      this.model.newFolder(newName, parent, data => {
         this.render(data)
       })
     }
   }
 
-  folderRemove (name) {
-    this.model.removeFolder(name, (err, data) => {
-      if (err) return
+  removeFolder (name) {
+    this.model.removeFolder(name, data => {
       this.render(data)
     })
   }

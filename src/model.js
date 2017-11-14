@@ -1,48 +1,48 @@
 export default class Model {
   constructor (store) {
     this.store = store
-    this.initDb()
-  }
-  initDb () {
-    let items = this.store.find({ _name: 'scrachy' })
-    if (items.length === 0) {
-      this.store.insert({
-        _name: 'scrachy',
-        root: []
-      })
-    }
-  }
-  newNote (payload, cb) {
-    let note = this._makeNote(payload)
-    let data = this.data()
-    if (payload.folder === 'root') {
-      data.root.push(note)
+    let localData = this.store.get()
+    if (!localData) {
+      this.data = {
+        id: String(Date.now()),
+        name: 'Root',
+        note: [],
+        child: []
+      }
+      this.sync()
     } else {
-      this.findFolder(data, payload.folder, folder => {
-        console.log('folder', folder)
-        folder.root.push(note)
-      })
+      this.data = localData
     }
-    this.sync(data)
-    cb(data)
   }
 
+  getData (cb) {
+    cb(this.data)
+  }
+
+  newNote (payload, cb) {
+    let note = this._makeNote(payload)
+    this.findFolder(this.data, payload.folder, (folder, parent) => {
+      folder.note.push(note)
+    })
+    this.sync()
+    cb(this.data)
+  }
+
+  // callback(folderObj, parentObj)
   findFolder (data, folder, cb) {
-    let keys = Object.keys(data)
-    for (let i = keys.length - 1; i >= 0; i--) {
-      let key = keys[i]
-      if (folder === key) {
-        cb(data[key])
-      } else if (Object.keys(data[key]).length > 1) {
-        return this.findFolder(data[key], folder, cb)
+    let _f = (data, parent, folder) => {
+      if (String(data.id) === String(folder)) return cb(data, parent)
+      for (let i = data.child.length - 1; i >= 0; i--) {
+        let child = data.child[i]
+        _f(child, data, folder)
       }
     }
-    return null
+    _f(data, data, folder)
   }
 
   _makeNote (payload) {
     return {
-      id: Date.now(),
+      id: String(Date.now()),
       title: this._generateTitle(payload.data),
       content: payload.data
     }
@@ -56,123 +56,46 @@ export default class Model {
     return matched[1]
   }
 
-  data () {
-    return this.store.find({ _name: 'scrachy' })[0]
-  }
-
   newFolder (title, parent, cb) {
-    let folder = {}
-    folder[title] = {
-      root: []
-    }
-    if (Object.keys(this.data()).indexOf(title) !== -1) {
-      return cb(new Error('Duplicate name.'), null)
-    }
-    if (parent === 0) {
-      this.store.update({ _name: 'scrachy' }, folder)
-      cb(null, this.data())
+    this.findFolder(this.data, parent, (folder, parent) => {
+      folder.child.push(this._generateFolder(title))
+      this.sync()
+      cb(this.data)
+    })
+  }
+  _generateFolder (title) {
+    return {
+      id: Date.now(),
+      name: title,
+      note: [],
+      child: []
     }
   }
-
   renameFolder (old, newName, cb) {
-    let data = this.data()
-    let ret = this._rename(old, newName, data)
-    this.sync(data)
-    cb(ret, data)
+    this.findFolder(this.data, old, (folder, parent) => {
+      folder.name = newName
+      this.sync()
+      return cb(this.data)
+    })
   }
 
-  _rename (old, newName, data) {
-    let error = null
-    let keys = Object.keys(data)
-    for (let i = keys.length - 1; i >= 0; i--) {
-      let key = keys[i]
-      if (key === old) {
-        if (data[newName]) {
-          error = new Error('Duplicate name')
-          break
-        } else {
-          data[newName] = data[key]
-          delete data[key]
-          break
-        }
-      } else if (Object.keys(data[key]).length > 1) {
-        this._rename(old, newName, data[key])
-      }
-    }
-    return error
+  removeFolder (id, cb) {
+    this.findFolder(this.data, id, (folder, parent) => {
+      parent.child = parent.child.filter(folder => {
+        return String(folder.id) !== String(id)
+      })
+      this.sync()
+      return cb(this.data)
+    })
   }
 
-  removeFolder (name, cb) {
-    let data = this.data()
-    let ret = this._remove(name, data)
-    if (!ret) this.sync(data)
-    cb(ret, data)
+  getFolder (id, cb) {
+    this.findFolder(this.data, id, (folder, parent) => {
+      cb(folder)
+    })
   }
 
-  _remove (name, data) {
-    let error = null
-    let keys = Object.keys(data)
-    for (let i = keys.length - 1; i >= 0; i--) {
-      let key = keys[i]
-      if (key === name) {
-        delete data[key]
-        break
-      } else if (Object.keys(data[key]).length > 1) {
-        this._remove(name, data[key])
-      }
-    }
-    return error
-  }
-
-  createSub (parent, name, cb) {
-    let data = this.data()
-    let ret = this._createSub(parent, name, data)
-    if (!ret) this.sync(data)
-    cb(ret, data)
-  }
-
-  filterFolder (name) {
-    let data = this.data()
-    return this._filterFolder(data, name)
-  }
-
-  _filterFolder (data, name) {
-    let keys = Object.keys(data)
-    for (let i = keys.length - 1; i >= 0; i--) {
-      let key = keys[i]
-      if (name === key) {
-        return data[key]
-      } else if (Object.keys(data[key]).length > 1) {
-        return this._filterFolder(data[key], name)
-      }
-    }
-    return null
-  }
-
-  _createSub (parent, name, data) {
-    let error = null
-    let keys = Object.keys(data)
-    for (let i = keys.length - 1; i >= 0; i--) {
-      let key = keys[i]
-      if (key === parent) {
-        if (data[name]) {
-          error = new Error('Duplicate name')
-          break
-        } else {
-          data[key][name] = {
-            root: []
-          }
-          break
-        }
-      } else if (Object.keys(data[key]).length > 1) {
-        this._createSub(parent, name, data[key])
-      }
-    }
-    return error
-  }
-
-  sync (data) {
-    this.store.remove({_name: 'scrachy'})
-    this.store.insert(data)
+  sync () {
+    this.store.set(this.data)
   }
 }
