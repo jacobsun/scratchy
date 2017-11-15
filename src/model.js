@@ -25,7 +25,7 @@ export default class Model {
       folder.note.push(note)
     })
     this.sync()
-    cb(this.data)
+    cb(note)
   }
 
   // callback(folderObj, parentObj)
@@ -65,7 +65,7 @@ export default class Model {
   }
   _generateFolder (title) {
     return {
-      id: Date.now(),
+      id: String(Date.now()),
       name: title,
       note: [],
       child: []
@@ -86,6 +86,22 @@ export default class Model {
       })
       this.sync()
       return cb(this.data)
+    })
+  }
+
+  removeItem (folderId, id, cb) {
+    this.findFolder(this.data, folderId, (folder, parent) => {
+      folder.note = folder.note.filter(note => {
+        return String(note.id) !== String(id)
+      })
+    })
+    this.sync()
+    return cb(this.data)
+  }
+
+  getItem (folder, item, cb) {
+    this.findFolder(this.data, folder, (folder, parent) => {
+      cb(folder.note.find(note => note.id === item))
     })
   }
 

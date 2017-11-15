@@ -11,4 +11,5 @@ const model = new Model(store)
 const view = new View(new Template())
 const controller = new Controller(view, model)
 
-on(window, 'load', controller.init.bind(controller))
+on(window, 'load', controller.render.bind(controller))
+on(window, 'hashchange', controller.route.bind(controller))

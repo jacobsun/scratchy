@@ -1,10 +1,10 @@
-const Path  = require('path')
+const Path = require('path')
 const Webpack = require('webpack')
 const ExtractText = require('extract-text-webpack-plugin')
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 let src = Path.resolve(__dirname, 'src')
 let dist = Path.resolve(__dirname, 'dist')
-let isProduction = process.env.NODE_ENV === 'production'? true : false
+let isProduction = process.env.NODE_ENV === 'production'
 let config = {
   entry: {
     app: './src/index.js'
@@ -21,10 +21,10 @@ let config = {
       '~': Path.resolve(__dirname, 'node_modules')
     }
   },
-  devServer:{
+  devServer: {
   },
-  module:{
-    rules:[
+  module: {
+    rules: [
       {
         enforce: 'pre',
         test: /\.(js)$/,
@@ -58,39 +58,39 @@ let config = {
     ],
     noParse: /node_modules\/(jquey|moment|chart\.js)/
   },
-  plugins:[
+  plugins: [
   ]
 }
 
 let devConfig = {
-  module:{
-    rules:[
+  module: {
+    rules: [
       {
-        test:/\.styl$/,
-        use:['style-loader', 'css-loader', 'stylus-loader']
+        test: /\.styl$/,
+        use: ['style-loader', 'css-loader', 'stylus-loader']
       },
       {
         test: /\.css$/,
-        use:['style-loader','css-loader']
-      },
+        use: ['style-loader', 'css-loader']
+      }
     ]
   },
-  plugins:[
+  plugins: [
   ]
 }
 
 let proConfig = {
-  module:{
-    rules:[
+  module: {
+    rules: [
       {
-        test:/\.js$/,
+        test: /\.js$/,
         use: 'babel-loader',
-        exclude:/node_modules/
+        exclude: /node_modules/
       },
       {
         test: /\.css$/,
         use: ExtractText.extract({
-          use:'css-loader',
+          use: 'css-loader',
           fallback: 'style-loader'
         })
       },
@@ -111,17 +111,17 @@ let proConfig = {
       }
     ]
   },
-  plugins:[
+  plugins: [
     new Webpack.optimize.UglifyJsPlugin({
-      test:/\.js$/,
-      exclude: [/\.min\.js$/gi] ,
+      test: /\.js$/,
+      exclude: [/\.min\.js$/gi],
       beautify: false,
       comments: false,
       compress: {
         warnings: false,
         drop_console: false,
         collapse_vars: true,
-        reduce_vars: true,
+        reduce_vars: true
       }
     }),
     new ExtractText('css/app.css'),
@@ -130,27 +130,27 @@ let proConfig = {
     }),
     new Webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
-      minChunks: function({ resource }) {
-          return resource &&
-            resource.indexOf('node_modules') >= 0 &&
-            resource.match(/\.js$/);
-        }
+      minChunks: function ({ resource }) {
+        return resource &&
+          resource.indexOf('node_modules') >= 0 &&
+          resource.match(/\.js$/)
+      }
     }),
     new Webpack.optimize.CommonsChunkPlugin({
       name: 'manifest',
-      minChunks: Infinity,
+      minChunks: Infinity
     }),
     new Webpack.HashedModuleIdsPlugin()
   ]
 }
 
-if(isProduction){
+if (isProduction) {
   config.module.rules = config.module.rules.concat(proConfig.module.rules)
   config.plugins = config.plugins.concat(proConfig.plugins)
-  config.performance = { //performance budget 默认是250kb
+  config.performance = { // performance budget 默认是250kb
     hints: 'warning', // 'error' or false are valid too
     maxEntrypointSize: 40000, // in bytes
-    maxAssetSize: 450000, // in bytes
+    maxAssetSize: 450000 // in bytes
   }
 } else {
   config.module.rules = config.module.rules.concat(devConfig.module.rules)
