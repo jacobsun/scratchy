@@ -22,7 +22,8 @@ export default class View {
       contentSave: qs('.content .save'),
       contentEdit: qs('.content .edit'),
       contentRemove: qs('.content .remove'),
-      contentCopy: qs('.content .copy')
+      contentCopy: qs('.content .copy'),
+      createNewFolder: qs('.new-folder')
     }
     this.expandedTree = []
     this.bindCreate()
@@ -32,6 +33,8 @@ export default class View {
     this.bindFolderRename()
     this.bindCreateSubFolder()
     this.bindToggleFolder()
+    this.bindCreateNewFolder()
+    this.bindContentPreview()
   }
 
   bindToggleFolder () {
@@ -51,7 +54,6 @@ export default class View {
       let items = qsa('.item-title')
       items.forEach(item => item.classList.remove('selectedFolder'))
       target.classList.add('selectedFolder')
-      // this.selectedFolder = target.dataset.id
       cb(this.folder)
     }, false)
   }
@@ -62,13 +64,11 @@ export default class View {
     // not record
     if (i < 0) {
       if (isExpanded) {
-        console.log('push', id)
         this.expandedTree.push(id)
       }
     } else {
       // recorded
       if (!isExpanded) {
-        console.log('remove', id)
         this.expandedTree.splice(i, 1)
       }
     }
@@ -95,7 +95,15 @@ export default class View {
   bindSave (cb) {
     on(this.doms.save, 'click', (evt) => {
       evt.preventDefault()
-      cb(this.doms.textarea.value, this.doms.selectFolder.value)
+      let info = {
+        mode: this.doms.textarea.dataset.mode,
+        id: this.doms.textarea.dataset.id
+      }
+      if (this.doms.selectFolder.value.match(/newfolder_/)) {
+        alert('Please create a folder using the left button first.')
+        return
+      }
+      cb(this.doms.textarea.value, this.doms.selectFolder.value, info)
     }, false)
   }
 
@@ -151,6 +159,7 @@ export default class View {
     this.oldName = ''
     this.doms.overlayInput.value = ''
     this.CancelOverlay()
+    this.resetTextarea()
   }
   updateTree (data) {
     this.doms.tree.innerHTML = this.template.treeContent(data, this.expandedTree)
@@ -171,7 +180,7 @@ export default class View {
     }, false)
   }
 
-  bindCreateSubFolder (cb) {
+  bindCreateSubFolder () {
     delegate(this.doms.body, '.create-sub', 'click', (evt) => {
       evt.preventDefault()
       this.parentName = evt.target.parentNode.parentNode.dataset.id
@@ -181,15 +190,23 @@ export default class View {
       this.activeOverlay()
     }, false)
   }
+  bindCreateNewFolder () {
+    delegate(this.doms.tree, '.new-folder', 'click', (evt) => {
+      evt.preventDefault()
+      this.parentName = evt.target.dataset.root
+      this.activeOverlay()
+    }, false)
+  }
 
   bindItemRemove (cb) {
     delegate(this.doms.body, '.remove-item', 'click', (evt) => {
       evt.preventDefault()
-      cb(evt.target.parentNode.dataset.id)
+      let item = evt.target.parentNode
+      cb(item.dataset.id, item.dataset.folder)
     }, false)
   }
 
-  showItem (data) {
+  showItem (data, folder) {
     if (!data) {
       this.doms.textarea.value = ''
       this.doms.contentContainer.classList.add('edit')
@@ -199,32 +216,44 @@ export default class View {
     this.doms.contentContainer.classList.remove('edit')
     this.doms.contentTitle.innerHTML = data.title
     this.doms.contentHeader.dataset.id = data.id
+    this.doms.contentHeader.dataset.folder = folder
     this.doms.contentBody.innerHTML = this.template.contentBody(data)
   }
 
-  // bindContentPreview (cb) {
-  //   on(this.doms.contentPreview, 'click', (evt) => {
-  //     evt.preventDefault()
-  //     cb(this.doms.textarea.value)
-  //   })
-  // }
+  bindContentPreview (cb) {
+    delegate(this.doms.contentContainer, '.preview', 'click', (evt) => {
+      evt.preventDefault()
+      alert('This is for markdown, but it is not implemented now, maybe later.')
+    })
+  }
 
-  // bindEdit (cb) {
-  //   on(this.doms.contentEdit, 'click', evt => {
-  //     evt.preventDefault()
-  //     cb()
-  //   })
-  // }
+  bindEdit (cb) {
+    on(this.doms.contentEdit, 'click', evt => {
+      evt.preventDefault()
+      let item = evt.target.parentNode.parentNode
+      cb(item.dataset.id, item.dataset.folder)
+    })
+  }
 
-  // fillTextarea (data) {
-  //   this.doms.textarea.value = data
-  //   this._fixTextareaHeight()
-  //   this.doms.contentContainer.classList.add('edit')
-  // }
+  fillTextarea (data, folder) {
+    this.doms.textarea.value = data.content
+    this.doms.textarea.dataset.mode = 'edit'
+    this.doms.textarea.dataset.id = data.id
+    this.doms.selectFolder.value = folder
+    this._fixTextareaHeight()
+    this.doms.contentContainer.classList.add('edit')
+  }
+
+  resetTextarea () {
+    this.doms.textarea.dataset.mode = ''
+    this.doms.textarea.dataset.id = ''
+    this.doms.selectFolder.value = ''
+  }
   bindContentRemove (cb) {
     on(this.doms.contentRemove, 'click', evt => {
       evt.preventDefault()
-      cb(evt.target.parentNode.parentNode.dataset.id)
+      let item = evt.target.parentNode.parentNode
+      cb(item.dataset.id, item.dataset.folder)
     })
   }
 }

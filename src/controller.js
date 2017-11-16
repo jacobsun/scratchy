@@ -8,6 +8,7 @@ export default class Controller {
     this.view.bindFolderRemove(this.removeFolder.bind(this))
     this.view.bindItemRemove(this.removeItem.bind(this))
     this.view.bindContentRemove(this.removeItem.bind(this))
+    this.view.bindEdit(this.edit.bind(this))
   }
 
   render () {
@@ -19,10 +20,6 @@ export default class Controller {
       if (location.hash.length > 2) {
         this.route()
       }
-      //  else {
-      //   this.view.updateNoteList(data)
-      //   this.showNote(data)
-      // }
     })
   }
 
@@ -44,18 +41,26 @@ export default class Controller {
   showNote (uri) {
     if (!uri) return this.view.showItem(undefined)
     this.model.getItem(uri[0], uri[1], data => {
-      this.view.showItem(data)
+      this.view.showItem(data, uri[0])
     })
   }
 
-  save (raw, folder) {
+  save (raw, folder, {mode, id}) {
     let data = raw.trim()
     if (data.length < 1) return
-    this.model.newNote({data, folder}, note => {
-      let hash = `#/${folder}/${note.id}`
-      window.history.pushState(null, null, hash)
-      this.render()
-    })
+    if (mode === 'edit') {
+      this.model.editNote({data, folder, id}, note => {
+        let hash = `#/${folder}/${note.id}`
+        window.history.pushState(null, null, hash)
+        this.render()
+      })
+    } else {
+      this.model.newNote({ data, folder }, note => {
+        let hash = `#/${folder}/${note.id}`
+        window.history.pushState(null, null, hash)
+        this.render()
+      })
+    }
   }
 
   saveOverlayInput (parent, old, newName) {
@@ -64,8 +69,10 @@ export default class Controller {
         this.render()
       })
     } else {
-      this.model.newFolder(newName, parent, data => {
-        this.render()
+      this.model.newFolder(newName, parent, (data, newFolder) => {
+        let hash = `#/${newFolder.id}`
+        window.history.pushState(null, null, hash)
+        this.render(data)
       })
     }
   }
@@ -76,12 +83,16 @@ export default class Controller {
     })
   }
 
-  removeItem (id) {
-    this.uri.splice(1, 1)
-    console.log(this.uri)
-    this.model.removeItem(this.uri[0], id, (data) => {
+  removeItem (id, folder) {
+    this.model.removeItem(id, folder, (data) => {
       window.history.pushState(null, null, '#/' + this.uri[0])
       this.render()
+    })
+  }
+
+  edit (id, folder) {
+    this.model.getItem(folder, id, note => {
+      this.view.fillTextarea(note, folder)
     })
   }
 }

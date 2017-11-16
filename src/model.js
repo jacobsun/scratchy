@@ -58,9 +58,10 @@ export default class Model {
 
   newFolder (title, parent, cb) {
     this.findFolder(this.data, parent, (folder, parent) => {
-      folder.child.push(this._generateFolder(title))
+      let newFolder = this._generateFolder(title)
+      folder.child.push(newFolder)
       this.sync()
-      cb(this.data)
+      cb(this.data, newFolder)
     })
   }
   _generateFolder (title) {
@@ -89,7 +90,7 @@ export default class Model {
     })
   }
 
-  removeItem (folderId, id, cb) {
+  removeItem (id, folderId, cb) {
     this.findFolder(this.data, folderId, (folder, parent) => {
       folder.note = folder.note.filter(note => {
         return String(note.id) !== String(id)
@@ -105,6 +106,15 @@ export default class Model {
     })
   }
 
+  editNote ({data, folder, id}, cb) {
+    this.findFolder(this.data, folder, (folder, parent) => {
+      let note = folder.note.find(n => String(n.id) === String(id))
+      note.title = this._generateTitle(data)
+      note.content = data
+      this.sync()
+      cb(note)
+    })
+  }
   getFolder (id, cb) {
     this.findFolder(this.data, id, (folder, parent) => {
       cb(folder)
