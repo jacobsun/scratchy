@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="zh">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>vanilla</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./dist/css/app.css">
+  </head>
+  <body>
+  <header class="header">
+    <h1 class="logo">Scrachy Note</h1>
+  </header>
+  <main>
+    <aside class="side tree-container">
+      <div class="create">
+        <a href="#" class="btn create">Create</a>
+      </div>
+      <ul class="tree">
+        <button class="btn new-folder">Create a folder</button>
+      </ul>
+    </aside>
+    <aside class="side list-container">
+      <div class="search">
+        <button></button> <input type="text" name="search" placeholder="Search...">
+      </div>
+      <ul>
+      </ul>
+    </aside>
+    <div class="content-container">
+      <div class="content">
+        <header>
+          <h1 class="title">A vanilla note-taking app</h1>
+          <div class="control">
+            <a href="#" class="btn edit">Edit</a>
+            <a href="#" class="btn remove">Remove</a>
+          </div>
+        </header>
+        <div class="content-body">
+          <p>You have to create a folder before you write something, it supports multi-level directories.</p>
+          <p>This is merely a vanilla mvc demo, which uses your localStorage to save data, the space is limited to 10MB on desktops.</p>
+            <p>
+              <a href="https://github.com/jacobsun/scratchy">Github</a>
+            </p>
+          </p>
+        </div>
+      </div>
+      <div class="editor">
+        <div class="editor-control">
+          <div class="select">
+            <select class="select-folder">
+            </select>
+          </div>
+          <div class="editor-menu">
+            <a href="#" class="btn preview">Preview</a>
+            <a href="#" class="btn save">Save</a>
+          </div>
+        </div>
+        <textarea></textarea>
+      </div>
+    </div>
+  </main>
+  <div class="overlay">
+    <div class="box">
+      <input type="text">
+      <div class="control">
+        <a href="#" class="btn overlay-confirm">Confirm</a>
+        <a href="#" class="btn overlay-cancel">Cancel</a>
+      </div>
+    </div>
+  </div>
+    <script src="dist/manifest.js"></script>
+    <script src="dist/vendor.js"></script>
+    <script src="dist/app.js"></script>
+  </body>
+</html>
