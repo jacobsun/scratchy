@@ -67,11 +67,11 @@ let devConfig = {
     rules: [
       {
         test: /\.styl$/,
-        use: ['style-loader', 'css-loader', 'stylus-loader']
+        use: ['style-loader', 'css-loader', 'postcss-loader', 'stylus-loader']
       },
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader']
+        use: ['style-loader', 'css-loader', 'postcss-loader']
       }
     ]
   },
@@ -90,7 +90,7 @@ let proConfig = {
       {
         test: /\.css$/,
         use: ExtractText.extract({
-          use: 'css-loader',
+          use: ['css-loader', 'postcss-loader'],
           fallback: 'style-loader'
         })
       },
@@ -104,6 +104,7 @@ let proConfig = {
                 minimize: true
               }
             },
+            'postcss-loader',
             'stylus-loader'
           ],
           fallback: 'style-loader'

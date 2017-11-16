@@ -3,6 +3,7 @@
 This is merely a vanilla mvc demo, which uses your localStorage to save data, the space is limited to 10MB on desktops.
 
 # Demo
+
 [Click](https://jacobsun.github.io/scratchy/)
 
 # Install
