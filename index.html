@@ -19,7 +19,7 @@
         <a href="#" class="btn create">Create</a>
       </div>
       <ul class="tree">
-        <button class="btn new-folder">Create a folder</button>
+        <!-- <button class="btn new-folder">Create a folder</button> -->
       </ul>
     </aside>
     <aside class="side list-container">
@@ -39,8 +39,16 @@
           </div>
         </header>
         <div class="content-body">
-          <p>You have to create a folder before you write something, it supports multi-level directories.</p>
-          <p>This is merely a vanilla mvc demo, which uses your localStorage to save data, the space is limited to 10MB on desktops.</p>
+          <ul>
+            <li>Click Create button to write note</li>
+            <li>Hover on folder to see buttons</li>
+            <li>Double click folder to toggle</li>
+            <li>Hover on note title in note list to get delete button</li>
+            <li>Note title are auto generated, I don't want to write it manually</li>
+            <li>You can also create top-level folder via select list</li>
+            <li>In select list, you can choose what folder the note will save to</li>
+          </ul>
+          <p>This is merely a vanilla mvc demo with zero dependency, which uses your localStorage to save data, the space is limited to 10MB on desktops.</p>
             <p>
               <a href="https://github.com/jacobsun/scratchy">Github</a>
             </p>
@@ -58,7 +66,7 @@
             <a href="#" class="btn save">Save</a>
           </div>
         </div>
-        <textarea></textarea>
+        <textarea wrap="hard" placeholder="Awesome note here..."></textarea>
       </div>
     </div>
   </main>

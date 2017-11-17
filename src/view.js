@@ -23,7 +23,12 @@ export default class View {
       contentEdit: qs('.content .edit'),
       contentRemove: qs('.content .remove'),
       contentCopy: qs('.content .copy'),
-      createNewFolder: qs('.new-folder')
+      createNewFolder: qs('.new-folder'),
+      searchBar: qs('.search input')
+    }
+    this.defaultContent = {
+      title: this.doms.contentTitle.innerHTML,
+      body: this.doms.contentBody.innerHTML
     }
     this.expandedTree = []
     this.bindCreate()
@@ -33,8 +38,12 @@ export default class View {
     this.bindFolderRename()
     this.bindCreateSubFolder()
     this.bindToggleFolder()
-    this.bindCreateNewFolder()
+    // this.bindCreateNewFolder()
     this.bindContentPreview()
+    this.bindSearch()
+    this.bindOverlayInput()
+    this.bindCancelOverlayViaEsc()
+    this.flash = true
   }
 
   bindToggleFolder () {
@@ -82,6 +91,11 @@ export default class View {
     on(this.doms.create, 'click', (evt) => {
       evt.preventDefault()
       this.doms.textarea.value = ''
+      // replay animation hack
+      this.doms.textarea.classList.remove('visual-feedback')
+      void this.doms.textarea.offsetWidth
+      // hack end
+      this.doms.textarea.classList.add('visual-feedback')
       this.doms.contentContainer.classList.add('edit')
       this._fixTextareaHeight()
     }, false)
@@ -130,9 +144,34 @@ export default class View {
       let v = this.doms.overlayInput.value.trim()
       if (v.length > 0) {
         cb(this.parentName, this.oldName, v)
+      } else {
+        this.overlayError()
       }
     }, false)
   }
+
+  bindConfirmOverlayViaEnter (cb) {
+    delegate(this.doms.body, '.overlay input', 'keypress', evt => {
+      if (evt.keyCode === 13) {
+        let v = this.doms.overlayInput.value.trim()
+        if (v.length > 0) {
+          cb(this.parentName, this.oldName, v)
+        } else {
+          this.overlayError()
+        }
+      }
+    }, false)
+  }
+
+  bindCancelOverlayViaEsc () {
+    delegate(this.doms.body, '.overlay input', 'keyup', evt => {
+      if (evt.keyCode === 27) {
+        this.CancelOverlay()
+        this.doms.overlayInput.value = ''
+      }
+    }, false)
+  }
+
   bindOverlayInput () {
     on(this.doms.overlayInput, 'input', ({ target }) => {
       this.overlayErrorClear()
@@ -209,15 +248,17 @@ export default class View {
   showItem (data, folder) {
     if (!data) {
       this.doms.textarea.value = ''
-      this.doms.contentContainer.classList.add('edit')
-      this._fixTextareaHeight()
+      this.doms.contentHeader.classList.add('no-content')
+      this.doms.contentTitle.innerHTML = this.defaultContent.title
+      this.doms.contentBody.innerHTML = this.defaultContent.body
       return
     }
+    this.doms.contentHeader.classList.remove('no-content')
     this.doms.contentContainer.classList.remove('edit')
     this.doms.contentTitle.innerHTML = data.title
+    this.doms.contentBody.innerHTML = this.template.contentBody(data)
     this.doms.contentHeader.dataset.id = data.id
     this.doms.contentHeader.dataset.folder = folder
-    this.doms.contentBody.innerHTML = this.template.contentBody(data)
   }
 
   bindContentPreview (cb) {
@@ -255,5 +296,14 @@ export default class View {
       let item = evt.target.parentNode.parentNode
       cb(item.dataset.id, item.dataset.folder)
     })
+  }
+
+  bindSearch () {
+    on(this.doms.searchBar, 'focus', evt => {
+      if (this.flash) {
+        alert('Sorry, searching is not available right now.')
+        this.flash = false
+      }
+    }, true)
   }
 }

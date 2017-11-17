@@ -14,7 +14,6 @@ export default class Model {
       this.data = localData
     }
   }
-
   getData (cb) {
     cb(this.data)
   }
@@ -115,6 +114,7 @@ export default class Model {
       cb(note)
     })
   }
+
   getFolder (id, cb) {
     this.findFolder(this.data, id, (folder, parent) => {
       cb(folder)

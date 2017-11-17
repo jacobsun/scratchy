@@ -44,45 +44,34 @@ export default class Template {
     let _o = (str, i, data) => {
       let pad = ''
       for (let j = i * 2; j > 0; j--) {
-        pad += '-'
+        pad += '·'
       }
-      data.forEach(folder => {
-        str += `<option ${selected === String(folder.id) ? 'selected' : ''} value="${folder.id}">${pad}${folder.name}</option>`
-        str = _o(str, i + 1, folder.child)
+      str += `<option ${selected === String(data.id) ? 'selected' : ''} value="${data.id}">${pad}${data.name}</option>`
+      data.child.forEach(folder => {
+        str = _o(str, i + 1, folder)
       })
       return str
     }
-    let ret = _o('', 0, data.child)
-    if (data.child.length === 0) {
-      ret += `<option value="newfolder_${data.id}">No folder</option>`
-    } else {
-      ret += `<option value="newfolder_${data.id}">New Folder</option>`
-    }
-    return ret
+    return _o('', 0, data) + `<option value="newfolder_${data.id}">New Folder</option>`
   }
 
   treeContent (data, expanded) {
-    let root = data.id
-    data = data.child
-    if (data.length === 0) {
-      return `<button class="btn new-folder" data-root="${root}">Create a folder</button>`
-    }
     let selectedFolder = location.hash.replace(/^#\//, '').split('/')[0]
     let _i = (str, data) => {
-      data.forEach(folder => {
-        let hasSub = folder.child.length > 0
-        str += `
-<li class="tree-item ${hasSub ? 'expandable' : ''} ${hasSub && expanded.indexOf(String(folder.id)) > -1 ? 'expanded' : ''}">
-<div class="tree-node">
-  <a href="#/${folder.id}" data-id="${folder.id}" class="item-title ${selectedFolder === String(folder.id) ? 'selectedFolder' : ''}">${folder.name}<div class="folder-control"><i class="rename-folder"></i><i class="create-sub"></i><i class="remove-folder"></i></div></a>
-</div>`
-        if (hasSub) {
+      let hasSub = data.child.length > 0
+      str += `
+      <li class="tree-item ${hasSub ? 'expandable' : ''} ${hasSub && expanded.indexOf(String(data.id)) > -1 ? 'expanded' : ''}">
+      <div class="tree-node">
+      <a href="#/${data.id}" data-id="${data.id}" class="item-title ${selectedFolder === String(data.id) ? 'selectedFolder' : ''}">${data.name}<div class="folder-control"><i class="rename-folder"></i><i class="create-sub"></i><i class="remove-folder"></i></div></a>
+      </div>`
+      if (hasSub) {
+        data.child.forEach(folder => {
           str += '<div class="sub-node"><ul class="tree">'
-          str = _i(str, folder.child)
+          str = _i(str, folder)
           str += '</ul></div>'
-        }
-        str += '</li>'
-      })
+        })
+      }
+      str += '</li>'
       return str
     }
     return _i('', data)

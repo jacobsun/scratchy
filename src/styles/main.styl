@@ -107,6 +107,9 @@ aside
   left: 0
   .create
     margin: 12px 0 1.5rem 0
+// hide root remove button
+.tree-container > .tree > .tree-item > .tree-node > .item-title .remove-folder
+  display: none
 .tree
   li
     display: block
@@ -124,10 +127,15 @@ aside
     margin: 0 0 0 1.5rem
   .item-title
     border-bottom: 1px solid transparent
-    overflow: hidden
+    // overflow: hidden
+    position: relative
     .folder-control
+      background: #FFF
+      padding: 0 3px
       display: none
-      float: right
+      position: absolute
+      right: 0
+      // float: right
     .rename-folder, .create-sub, .remove-folder
       color: cr_text_primary
       margin: auto 5px
@@ -238,7 +246,7 @@ aside
   header
     position: relative
     h1
-      padding: 1rem 0
+      padding: 1rem 0 2rem 0
     .control
       position: absolute
       top: 1rem
@@ -250,6 +258,9 @@ aside
         content: '\2326'
       .copy:before
         content: '\2398'
+  header.no-content
+    .control
+      display: none
   .content-body
     h1, h2, h3, h4, h5, h6
       margin:  0 0 1rem 0
@@ -257,6 +268,8 @@ aside
       margin: 0 0 1.5rem 1.5rem
     ul
       list-style-type: circle
+      li
+        margin: 1rem 0
     ol
       list-style-type:lower-roman
     p
@@ -357,3 +370,16 @@ aside
   display: inline-block
   width: 100%
   text-align: center
+
+.visual-feedback {
+  animation: pulse 1s 1;
+}
+
+@keyframes pulse {
+  0% {
+    background-color: cr_primary;
+  }
+  100% {
+    background-color: #FFF;
+  }
+}

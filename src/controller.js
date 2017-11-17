@@ -5,6 +5,7 @@ export default class Controller {
     this.view.bindSelectFolderList(this.filterNotes.bind(this))
     this.view.bindSave(this.save.bind(this))
     this.view.bindConfirmOverlay(this.saveOverlayInput.bind(this))
+    this.view.bindConfirmOverlayViaEnter(this.saveOverlayInput.bind(this))
     this.view.bindFolderRemove(this.removeFolder.bind(this))
     this.view.bindItemRemove(this.removeItem.bind(this))
     this.view.bindContentRemove(this.removeItem.bind(this))
