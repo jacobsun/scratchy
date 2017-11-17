@@ -48,6 +48,8 @@ code
   background: cr_primary
   width: 12px
 
+
+
 button:hover, a:hover
   cursor: pointer
 a
@@ -310,6 +312,8 @@ aside
   textarea
     width: 100%
     outline: none
+  textarea.error
+    border: 1px solid cr_danger
 
 .content-container
   .editor
@@ -355,15 +359,13 @@ aside
     border: 1px solid cr_text_primary
     padding: 1rem
     margin: 0 auto
+  &.error input
+    border: 1px solid cr_danger
   .btn
     display: inline-block
     padding: 1rem 1rem
 .overlay.active
   display: block
-
-.overlay.error
-  input
-    border: 1px solid cr_danger
 
 .new-folder
   padding: 1rem

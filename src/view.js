@@ -43,6 +43,7 @@ export default class View {
     this.bindSearch()
     this.bindOverlayInput()
     this.bindCancelOverlayViaEsc()
+    this.bindTextareaInput()
     this.flash = true
   }
 
@@ -96,6 +97,7 @@ export default class View {
       void this.doms.textarea.offsetWidth
       // hack end
       this.doms.textarea.classList.add('visual-feedback')
+      this.editorErrorClear()
       this.doms.contentContainer.classList.add('edit')
       this._fixTextareaHeight()
     }, false)
@@ -109,6 +111,11 @@ export default class View {
   bindSave (cb) {
     on(this.doms.save, 'click', (evt) => {
       evt.preventDefault()
+      let input = this.doms.textarea.value.trim()
+      if (input.length === 0) {
+        this.editorError()
+        return
+      }
       let info = {
         mode: this.doms.textarea.dataset.mode,
         id: this.doms.textarea.dataset.id
@@ -117,8 +124,22 @@ export default class View {
         alert('Please create a folder using the left button first.')
         return
       }
-      cb(this.doms.textarea.value, this.doms.selectFolder.value, info)
+      cb(input, this.doms.selectFolder.value, info)
     }, false)
+  }
+
+  bindTextareaInput () {
+    on(this.doms.textarea, 'focus', ({ target }) => {
+      this.editorErrorClear()
+    }, true)
+  }
+
+  editorError () {
+    this.doms.textarea.classList.add('error')
+  }
+
+  editorErrorClear () {
+    this.doms.textarea.classList.remove('error')
   }
 
   bindSelect () {
@@ -173,14 +194,15 @@ export default class View {
   }
 
   bindOverlayInput () {
-    on(this.doms.overlayInput, 'input', ({ target }) => {
+    on(this.doms.overlayInput, 'focus', ({ target }) => {
       this.overlayErrorClear()
-    })
+    }, true)
   }
   CancelOverlay () {
     this.doms.overlay.classList.remove('active')
   }
   activeOverlay () {
+    this.overlayErrorClear()
     this.doms.overlay.classList.add('active')
     this.doms.overlayInput.focus()
   }
